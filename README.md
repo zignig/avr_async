@@ -28,45 +28,6 @@ I had been looking at  [lilos](https://github.com/cbiffle/lilos) for a while but
 
 If you include a panic and attempt to get symbols and a full panic drop , you will run out of ram on the atmega32p , weird crashes will happen, don't do that.
 
-# Information
-
-```
-cargo install cargo-binutils
-```
-
-
-Some commands to get info 
-
-```
-cargo size --release -- -A
-
-.data                         1362  0x800100
-.text                        11282       0x0
-.bss                           111  0x800652
-.note.gnu.avr.deviceinfo        64       0x0
-.debug_info                   1524       0x0
-.debug_abbrev                 1442       0x0
-.debug_line                     26       0x0
-.debug_str                     520       0x0
-Total                        16331
-```
-
-Look like lots of static strings taking up ram. 
-
-``` cargo install cargo-bloat ```
-
-cargo bloat
-
-```
-File  .text    Size           Crate Name
-0.3%   8.9%  1.2KiB  newdrive_async newdrive_async::__avr_device_rt_main
-0.3%   8.7%  1.2KiB       [Unknown] __vector_16
-0.3%   8.6%  1.2KiB  newdrive_async newdrive_async::show_time::{{closure}}
-0.3%   7.7%  1.0KiB  newdrive_async newdrive_async::serial::SerialIncoming::task::{{closure}}
-0.2%   5.8%    794B  newdrive_async newdrive_async::drive::Drive::task::{{closure}}
-0.2%   5.8%    792B  newdrive_async newdrive_async::make_commands::{{closure}}
-0.2%   5.3%    728B  newdrive_async newdrive_async::executor::run_tasks
-0.1%   4.1%    568B  newdrive_async newdrive_async::drive::Drive::adjust_throttle
-```
-
-look at the code size, because it is harvard architecture this matters less.
+# Changes
+ 
+You may need to change the serial port in .cargo/config.toml and console.py to talk to your device.
