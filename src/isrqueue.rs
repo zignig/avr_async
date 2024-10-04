@@ -40,6 +40,8 @@ impl<T, const N: usize> ISRQueue<T, N> {
         }
     }
 
+    
+    #[allow(dead_code)]
     pub fn get_sender(&self) -> Sender<T, N> {
         Sender { queue: &self }
     }
@@ -79,6 +81,8 @@ impl<T, const N: usize> ISRQueue<T, N> {
         });
     }
 
+    
+    #[allow(dead_code)]
     pub fn len(&self) -> usize { 
         avr_device::interrupt::free(|cs| {
             let inner = &mut *self.inner.borrow(cs).borrow_mut();
@@ -87,15 +91,19 @@ impl<T, const N: usize> ISRQueue<T, N> {
     }
 }
 
+
+#[allow(dead_code)]
 pub struct Sender<'a, T, const N: usize> {
     queue: &'a ISRQueue<T, N>,
 }
 
 impl<T, const N: usize> Sender<'_, T, N> {
+    #[allow(dead_code)]
     pub fn send(&self, item: T) {
         self.queue.send(item);
     }
-
+    
+    #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.queue.len()
     }

@@ -34,26 +34,9 @@ pub enum DriveCommands {
     Stop,
 }
 
-// All the saved configs for the drive
-// This should be saved/loaded from eeprom.
-pub struct DriveConfig {
-    rate: i16,
-    stop_rate: i16,
-}
-
-impl DriveConfig {
-    pub fn new() -> Self {
-        Self {
-            rate: 2,
-            stop_rate: 10,
-        }
-    }
-}
-
 // Represention of the dual drive
 pub struct Drive {
     state: DriveState,
-    config: DriveConfig,
     timeout: TickDuration,
     next_timeout: u64,
     throttle: i16,
@@ -65,10 +48,9 @@ pub struct Drive {
 
 impl Drive {
     // TODO this need to be handed to an eeprom config
-    pub fn new(config: DriveConfig) -> Self {
+    pub fn new() -> Self {
         Self {
             state: DriveState::Init,
-            config: config, // load from eeprom for awesomeness.
             timeout: 500.millis(),
             next_timeout: 0,
             throttle: 0,

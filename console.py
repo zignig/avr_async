@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-" Serial interface for uploading boneless firmware"
-
 
 from serial.tools.miniterm import Miniterm
 import serial
@@ -15,16 +13,8 @@ class Console:
         self.ser = serial.serial_for_url(
             port, baud
         )
-        # self.ser.dtr = 0
 
     def attach(self):
-        import argparse
-
-        parser = argparse.ArgumentParser()
-        parser.add_argument("-l", "--list", action="store_true")
-        parser.add_argument("-v", "--verbose", action="store_true")
-
-        args = parser.parse_args()
         term = Miniterm(self.ser)
         term.set_rx_encoding("utf-8")
         term.set_tx_encoding("utf-8")

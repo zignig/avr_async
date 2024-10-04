@@ -76,7 +76,7 @@ fn main() -> ! {
 
     // Create  the drive
     // TODO get the config from eeprom
-    let mut drive = Drive::new(drive::DriveConfig::new());
+    let mut drive = Drive::new();
     // extract the task
     let drive_task = pin!(drive.task(drive_commands.get_receiver()));
 
